@@ -1,0 +1,54 @@
+{
+  "email_address": "rahulvyas.5100@gmail.com",
+  "email_deliverability": {
+    "status": "deliverable",
+    "status_detail": "valid_email",
+    "is_format_valid": true,
+    "is_smtp_valid": true,
+    "is_mx_valid": true,
+    "mx_records": [
+      "gmail-smtp-in.l.google.com",
+      "alt1.gmail-smtp-in.l.google.com",
+      "alt2.gmail-smtp-in.l.google.com",
+      "alt3.gmail-smtp-in.l.google.com",
+      "alt4.gmail-smtp-in.l.google.com"
+    ]
+  },
+  "email_quality": {
+    "score": "0.95",
+    "is_free_email": true,
+    "is_username_suspicious": false,
+    "is_disposable": false,
+    "is_catchall": false,
+    "is_subaddress": false,
+    "is_role": false,
+    "is_dmarc_enforced": true,
+    "is_spf_strict": false,
+    "minimum_age": null
+  },
+  "email_sender": {
+    "first_name": "Rahul",
+    "last_name": "Vyas",
+    "email_provider_name": "Google",
+    "organization_name": "Gmail",
+    "organization_type": "commercial"
+  },
+  "email_domain": {
+    "domain": "gmail.com",
+    "domain_age": 10973,
+    "is_live_site": true,
+    "registrar": "MarkMonitor Inc.",
+    "registrar_url": "https://markmonitor.com",
+    "date_registered": "1995-08-13",
+    "date_last_renewed": "2024-07-11",
+    "date_expires": "2025-08-12",
+    "is_risky_tld": false
+  },
+  "email_risk": { "address_risk_status": "low", "domain_risk_status": "low" },
+  "email_breaches": {
+    "total_breaches": 0,
+    "date_first_breached": null,
+    "date_last_breached": null,
+    "breached_domains": []
+  }
+}
