@@ -43,6 +43,25 @@ export const getTweets = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, "Tweets fetched successfully", tweets));
 });
 
+export const getUserTweets = asyncHandler(async (req, res) => {
+  // TODO: get user tweets
+  const { userId } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    throw new ApiError(400, "Invalid tweet ID");
+  }
+  const tweet = await Tweet.aggregatePaginate([
+    {
+      $match: { owner: new mongoose.Types.ObjectId(userId) },
+    },
+  ]);
+  if (!tweet.docs[0]) {
+    throw new ApiError(404, "no tweets found");
+  }
+  res
+    .status(200)
+    .json(new ApiResponse(200, "Tweet fetched successfully", tweet));
+});
+
 export const getTweetById = asyncHandler(async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {

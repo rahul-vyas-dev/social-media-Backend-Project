@@ -149,6 +149,53 @@ const getLikesByTweet = asyncHandler(async (req, res) => {
   );
 });
 
+const getLikedVideos = asyncHandler(async (req, res) => {
+  //TODO: get all liked videos
+  const { userId } = req.user._id;
+  const { page = 1, limit = 10 } = req.query;
+  if (!userId) {
+    throw new ApiError(401, "not a valid user");
+  }
+  const options = {
+    page: parseInt(page, 10),
+    limit: parseInt(limit, 10),
+    sort: { createdAt: -1 },
+  };
+  const result = await Like.aggregate(
+    [
+      {
+        $match: { likedBy: new mongoose.Types.ObjectId(userId) },
+        $lookup: {
+          from: "videos",
+          localField: "video",
+          foreignField: "_id",
+          as: "video",
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          "video._id": 1,
+          "video.title": 1,
+          "video.thumbnail": 1,
+          "video.duration": 1,
+          "video.views": 1,
+          createdAt: 1,
+        },
+      },
+    ],
+    options
+  );
+
+  if (result.length == 0) {
+    return res
+      .status(200)
+      .json(new ApiResponse(200, null, "no video is liked by you"));
+  }
+  return res
+    .status(200)
+    .json(new ApiResponse(200, result, "videos fetched successfully"));
+});
 export {
   toggleCommentLike,
   toggleTweetLike,
@@ -156,4 +203,5 @@ export {
   getLikesByVideo,
   getLikesByComment,
   getLikesByTweet,
+  getLikedVideos
 };
